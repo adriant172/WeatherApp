@@ -1,0 +1,32 @@
+body {
+    display: flex;
+    justify-content: center;
+    background-color: #E3DFFF;
+}
+
+.container {
+    width: 50%;
+    height: 60%;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 2fr 1fr;
+    gap: 5px;
+}
+
+.displayInfo {
+    display: flex;
+}
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    border: solid 2px #4F6367;
+    border-radius: 5px;
+    
+}
+li{
+    margin: 5px;
+}
+.condition {
+    display: flex;
+}
