@@ -5,13 +5,14 @@ body {
 }
 
 .container {
-    width: 50%;
+    width: 80vw;
     height: 60%;
     display: grid;
     justify-content: center;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 600px 1fr;
     grid-template-rows: auto;
     gap: 5px;
+    
     /* border: solid 2px black; */
     
 }
@@ -25,9 +26,14 @@ body {
 }
 #displayData {
     grid-column: 2 / 3;
-}
-.displayInfo {
-    display: flex;
+    display: grid;
+    padding: 3px;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows:repeat(4, 1fr);
+    width: 100%;
+    border: solid 2px #4F6367;
+    border-radius: 5px;
+    
 }
 
 ul {
@@ -47,5 +53,49 @@ li{
 }
 #forecast {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    gap: 10px;
+    grid-row: 3 / 4;
+    grid-column: 2 / 3;
+    width: 100%
+}
+
+
+#currentLocation {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    display: flex;
+    justify-content: center;
+}
+#currentCountry {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    display: flex;
+    justify-content: center;
+}
+#currentTemp {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    font-size: x-large;
+    display: flex;
+    justify-content: center;
+}
+#currentConditionText {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    display: flex;
+    justify-content: center;
+}
+#currentConditionIcon {
+    grid-column: 2 / 3;
+    grid-row: 2 / 5;
+    display: flex;
+    justify-content: center;
+    
+}
+#currentHumidity {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+    display: flex;
+    justify-content: center;
 }
