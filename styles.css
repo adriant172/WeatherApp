@@ -9,15 +9,30 @@ body {
     height: 60%;
     display: grid;
     justify-content: center;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
     gap: 5px;
+    /* border: solid 2px black; */
+    
 }
+#locationSearch {
+    grid-column: 1 / 2;
+}
+#currentWeatherBtn {
+    grid-column: 3 / 4;
+    max-width: 150px;
 
+}
+#displayData {
+    grid-column: 2 / 3;
+}
 .displayInfo {
     display: flex;
 }
+
 ul {
     list-style: none;
+    padding: 3px;
     display: flex;
     flex-direction: column;
     border: solid 2px #4F6367;
@@ -29,4 +44,8 @@ li{
 }
 .condition {
     display: flex;
+}
+#forecast {
+    display: flex;
+    justify-content: space-between;
 }
