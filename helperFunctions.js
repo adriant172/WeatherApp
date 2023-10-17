@@ -34,18 +34,36 @@ export async function getForecast(location) {
     }
 }
 
+// export async function getGif(weatherCondition) {
+//     try {
+//         let response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=E1kTslhEUkw22Mw9aF97kzUyyR2aZUPS&q=${weatherCondition}&limit=1`, {'mode': "cors"})
+//         if (response.status !== 200) {
+//             alert(response);
+//         }
+//         const result = await response.json();
+//         console.log(result);
+//         let resultData = result.data;
+//         return resultData[0].images.original.url
+//     } catch (error) {
+//         alert(error);
+//     }
+// }
+
 function forecastDataParser(data) {
     let forecastDays = data.forecast.forecastday;
     let newForecastDays = {}
     let counter = 0;
     for (const day of forecastDays) {
         newForecastDays[day.date] = {};
+        newForecastDays[day.date]["date"] = day.date;
         newForecastDays[day.date]["avg_temp_c"] = forecastDays[counter].day.avgtemp_c;
-        newForecastDays[day.date]["avg_temp_f"] = forecastDays[counter].day.avgtemp_c;
+        newForecastDays[day.date]["avg_temp_f"] = forecastDays[counter].day.avgtemp_f;
         newForecastDays[day.date]["avg_humidity"] = forecastDays[counter].day.avghumidity;
         newForecastDays[day.date]["condition"] = forecastDays[counter].day.condition;
         newForecastDays[day.date]["min_temp_c"] = forecastDays[counter].day.mintemp_c;
         newForecastDays[day.date]["max_temp_c"] = forecastDays[counter].day.maxtemp_c;
+        newForecastDays[day.date]["min_temp_f"] = forecastDays[counter].day.mintemp_f;
+        newForecastDays[day.date]["max_temp_f"] = forecastDays[counter].day.maxtemp_f;
         counter++;
     }
     return newForecastDays
@@ -71,8 +89,8 @@ export function getCity() {
 
 export function getWeatherButton(buttonID, currentContainer, forecastContainer, ) {
     let button = document.querySelector(`#${buttonID}`)
-    clearData(currentContainer);
-    clearData(forecastContainer);
+    // clearData(currentContainer);
+    // clearData(forecastContainer);
     button.addEventListener('click', async () => {
         let cityName = getCity();
         let currentWeatherData = await getCurrentWeather(cityName);
@@ -84,7 +102,7 @@ export function getWeatherButton(buttonID, currentContainer, forecastContainer, 
 }
 
 
-export function displayForecastWeather(dataContainer, weatherData ) {
+export function displayForecastWeatherOld(dataContainer, weatherData) {
     const dataList = document.createElement("ul");
     const tempScale = window.localStorage.getItem("tempScale");
     for (const key in weatherData) {
@@ -109,7 +127,38 @@ export function displayForecastWeather(dataContainer, weatherData ) {
     dataContainer.appendChild(dataList);
 }
 
-function displayCurrentWeather(dataContainer, weatherData) {
+function displayForecastWeather(dataContainer, weatherData) {
+    const forecastDataContainer = document.createElement("div");
+    forecastDataContainer.classList.add("forecastDataContainer");
+    const tempScale = window.localStorage.getItem("tempScale");
+    const day = createNewElement("div", "date", ["day"], weatherData.date )
+    let maxTemp;
+    let minTemp;
+    if (tempScale === "°C") {
+        maxTemp = createNewElement("div", "maxTemp" ,["temp"], `${weatherData.max_temp_c} ${tempScale}`);
+        minTemp = createNewElement("div", "minTemp" ,["temp"], `${weatherData.min_temp_c} ${tempScale}`);
+    } else {
+        maxTemp = createNewElement("div", "maxTemp" ,["temp"], `${weatherData.max_temp_f} ${tempScale}`);
+        minTemp = createNewElement("div", "minTemp" ,["temp"], `${weatherData.min_temp_f} ${tempScale}`);
+    }
+    const conditionText = createNewElement("p", `${weatherData.date}-conditionText`, ["condition"], weatherData.condition.text);
+
+    const conditionIconContainer = document.createElement("div");
+    const conditionIcon = createNewElement("img", `${weatherData.date}-conditionIcon` , ["condition"], weatherData.condition.icon);
+    conditionIconContainer.appendChild(conditionIcon);
+    conditionIconContainer.classList.add("forecastConditionIconContainer");
+
+    forecastDataContainer.appendChild(day);
+    forecastDataContainer.appendChild(maxTemp);
+    forecastDataContainer.appendChild(minTemp);
+    forecastDataContainer.appendChild(conditionText);
+    forecastDataContainer.appendChild(conditionIconContainer);
+    dataContainer.appendChild(forecastDataContainer);
+}
+
+async function  displayCurrentWeather(container, weatherData) {
+    clearData(container);
+    const dataContainer = createNewElement("div", "currentWeatherContainer", ["weatherContainer"]);
     const tempScale = window.localStorage.getItem("tempScale");
     const location = createNewElement("div", "currentLocation" ,["location"], `${weatherData.locationName}, ${weatherData.region}`);
     const country = createNewElement("div", "currentCountry", ["country"], weatherData.country);
@@ -121,14 +170,20 @@ function displayCurrentWeather(dataContainer, weatherData) {
     }
     const humidity = createNewElement("div", "currentHumidity", ["humidity"],`Humidity: ${weatherData.humidity}%` );
     const conditionText = createNewElement("p", "currentConditionText", ["condition"], weatherData.condition.text);
+
+    const conditionIconContainer = document.createElement("div");
     const conditionIcon = createNewElement("img", "currentConditionIcon" , ["condition"], weatherData.condition.icon);
+    conditionIconContainer.appendChild(conditionIcon);
+    conditionIconContainer.classList.add("conditionIconContainer");
 
     dataContainer.appendChild(location);
     dataContainer.appendChild(country);
     dataContainer.appendChild(temp);
     dataContainer.appendChild(humidity);
     dataContainer.appendChild(conditionText);
-    dataContainer.appendChild(conditionIcon);
+    dataContainer.appendChild(conditionIconContainer);
+
+    container.appendChild(dataContainer)
 }
 
 function createNewElement(type, id,  classes, content) {
@@ -151,12 +206,16 @@ function createNewElement(type, id,  classes, content) {
 }
 
 export function displayForecast(container, forecastWeatherData, ) {
+    clearData(container)
     for (const day in forecastWeatherData) {
         displayForecastWeather(container, forecastWeatherData[day])
     }
 }
-function clearData(dataContainer) {
+export function clearData(dataContainer) {
     while(dataContainer.firstChild) {
-        dataContainer.removeChild(dataContainer.firstChild)
+        dataContainer.removeChild(dataContainer.firstChild);
     }
 }
+
+
+

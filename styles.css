@@ -9,44 +9,73 @@ body {
     height: 60%;
     display: grid;
     justify-content: center;
-    grid-template-columns: 1fr 600px 1fr;
+    grid-template-columns: repeat(7, 1fr);
     grid-template-rows: auto;
     gap: 5px;
     
     /* border: solid 2px black; */
     
 }
+#searchContainer {
+    grid-column: 3 / 6;
+    display: flex;
+    justify-content:center;
+    gap: 15px;
+    height: 2em;
+}
 #locationSearch {
-    grid-column: 1 / 2;
+    max-width: 500px;
+    border: none;
+    border-radius: 5px;
+}
+#locationSearch:focus-visible {
+    border: none;
 }
 #currentWeatherBtn {
-    grid-column: 3 / 4;
     max-width: 150px;
-
 }
 #displayData {
-    grid-column: 2 / 3;
+    grid-column: 3 / 6;
+}
+#currentWeatherContainer {
     display: grid;
     padding: 3px;
     grid-template-columns: 1fr 3fr;
     grid-template-rows:repeat(4, 1fr);
-    width: 100%;
+    max-width: 80vw;
     border: solid 2px #4F6367;
     border-radius: 5px;
-    
+    background-color: rgba(87, 74, 226, 0.5);
 }
 
-ul {
-    list-style: none;
+.forecastDataContainer {
     padding: 3px;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     border: solid 2px #4F6367;
     border-radius: 5px;
-    
+    min-width: 250px;
 }
-li{
-    margin: 5px;
+#date {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+#maxTemp {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3 ;
+}
+#minTemp {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+}
+.forecastDataContainer > p {
+    grid-column: 3 / 4 ;
+    grid-row: 2 / 3;
+}
+.forecastConditionIconContainer {
+    grid-column: 3 / 4;
+    grid-row: 3 / 4;
 }
 .condition {
     display: flex;
@@ -56,8 +85,8 @@ li{
     justify-content: space-around;
     gap: 10px;
     grid-row: 3 / 4;
-    grid-column: 2 / 3;
-    width: 100%
+    grid-column: 2 / 7;
+    /* max-width: 900px */
 }
 
 
@@ -86,11 +115,19 @@ li{
     display: flex;
     justify-content: center;
 }
-#currentConditionIcon {
+/* #currentConditionIcon {
     grid-column: 2 / 3;
     grid-row: 2 / 5;
     display: flex;
     justify-content: center;
+    align-items: center;
+} */
+.conditionIconContainer {
+    grid-column: 2 / 3;
+    grid-row: 2 / 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
 }
 #currentHumidity {
