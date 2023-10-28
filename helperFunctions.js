@@ -1,3 +1,5 @@
+import * as apiCalls from './apiCalls.js'
+
 const KEY = "b64784ee65e54392b7670004231608"
 const ENDPOINT = "https://api.weatherapi.com/v1/"
 
@@ -34,20 +36,6 @@ export async function getForecast(location) {
     }
 }
 
-// export async function getGif(weatherCondition) {
-//     try {
-//         let response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=E1kTslhEUkw22Mw9aF97kzUyyR2aZUPS&q=${weatherCondition}&limit=1`, {'mode': "cors"})
-//         if (response.status !== 200) {
-//             alert(response);
-//         }
-//         const result = await response.json();
-//         console.log(result);
-//         let resultData = result.data;
-//         return resultData[0].images.original.url
-//     } catch (error) {
-//         alert(error);
-//     }
-// }
 
 function forecastDataParser(data) {
     let forecastDays = data.forecast.forecastday;
@@ -95,8 +83,8 @@ export function getWeatherButton(buttonID, currentContainer, forecastContainer, 
         let cityName = getCity();
         let currentWeatherData = await getCurrentWeather(cityName);
         let forecastWeatherData = await getForecast(cityName)
-        displayCurrentWeather(currentContainer, currentWeatherData );
-        displayForecast(forecastContainer, forecastWeatherData)
+        await displayCurrentWeather(currentContainer, currentWeatherData );
+        await displayForecast(forecastContainer, forecastWeatherData)
         
     })
 }
@@ -127,7 +115,7 @@ export function displayForecastWeatherOld(dataContainer, weatherData) {
     dataContainer.appendChild(dataList);
 }
 
-function displayForecastWeather(dataContainer, weatherData) {
+async function displayForecastWeather(dataContainer, weatherData) {
     const forecastDataContainer = document.createElement("div");
     forecastDataContainer.classList.add("forecastDataContainer");
     const tempScale = window.localStorage.getItem("tempScale");
@@ -144,7 +132,8 @@ function displayForecastWeather(dataContainer, weatherData) {
     const conditionText = createNewElement("p", `${weatherData.date}-conditionText`, ["condition"], weatherData.condition.text);
 
     const conditionIconContainer = document.createElement("div");
-    const conditionIcon = createNewElement("img", `${weatherData.date}-conditionIcon` , ["condition"], weatherData.condition.icon);
+    const conditionIconGif = await apiCalls.getGif(weatherData.condition.text);
+    const conditionIcon = createNewElement("img", `${weatherData.date}-conditionIcon` , ["condition"], conditionIconGif);
     conditionIconContainer.appendChild(conditionIcon);
     conditionIconContainer.classList.add("forecastConditionIconContainer");
 
@@ -172,7 +161,8 @@ async function  displayCurrentWeather(container, weatherData) {
     const conditionText = createNewElement("p", "currentConditionText", ["condition"], weatherData.condition.text);
 
     const conditionIconContainer = document.createElement("div");
-    const conditionIcon = createNewElement("img", "currentConditionIcon" , ["condition"], weatherData.condition.icon);
+    const conditionIconGif = await apiCalls.getGif(weatherData.condition.text);
+    const conditionIcon = createNewElement("img", "currentConditionIcon" , ["condition"], conditionIconGif);
     conditionIconContainer.appendChild(conditionIcon);
     conditionIconContainer.classList.add("conditionIconContainer");
 

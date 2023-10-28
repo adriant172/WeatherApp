@@ -43,7 +43,7 @@ body {
     grid-template-columns: 1fr 3fr;
     grid-template-rows:repeat(4, 1fr);
     max-width: 80vw;
-    border: solid 2px #4F6367;
+    border: none 2px #4F6367;
     border-radius: 5px;
     background-color: rgba(87, 74, 226, 0.5);
 }
@@ -53,9 +53,10 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    border: solid 2px #4F6367;
+    border: none 2px #4F6367;
     border-radius: 5px;
-    min-width: 250px;
+    width: 250px;
+    background-color: whitesmoke;
 }
 #date {
     grid-column: 2 / 3;
