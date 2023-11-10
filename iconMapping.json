@@ -1,0 +1,58 @@
+[
+    {
+        "condition":"sunny",
+        "icon": "clear-day.svg"
+    },
+    {
+        "condition":"clear",
+        "icon": "clear-day.svg"
+    },
+    {
+        "condition":"partly cloudy",
+        "icon": "partly-cloudy-day.svg"
+    },
+    {
+        "condition":"cloudy",
+        "icon": "cloudy.svg"
+    },
+    {
+        "condition":"overcast",
+        "icon": "overcast.svg"
+    },
+    {
+        "condition":"mist",
+        "icon": "mist.svg"
+    },
+    {
+        "condition":"fog",
+        "icon": "cloudy.svg"
+    },
+    {
+        "condition":"rain",
+        "icon": "rain.svg"
+    },
+    {
+        "condition":"raining",
+        "icon": "cloudy.svg"
+    },
+    {
+        "condition":"thunder",
+        "icon": "thunderstorms-day.svg"
+    },
+    {
+        "condition":"snow",
+        "icon": "snow.svg"
+    },
+    {
+        "condition":"drizzle",
+        "icon": "drizzle.svg"
+    },
+    {
+        "condition":"sleet",
+        "icon": "sleet.svg"
+    },
+    {
+        "condition":"pellets",
+        "icon": "hail.svg"
+    }
+]
