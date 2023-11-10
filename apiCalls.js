@@ -2,8 +2,8 @@ const GIPHY_KEY = "E1kTslhEUkw22Mw9aF97kzUyyR2aZUPS"
 
 export async function getGif(weatherCondition) {
     const words = weatherCondition.split()
-    for (const i = 0; i < words.length(); i++) {
-        if (words[i].lower() === "possible") {
+    for (let i = 0; i < words.length; i++) {
+        if (words[i].toLowerCase() === "possible") {
             words.splice(i, 1);
             weatherCondition = words.toString();
         }

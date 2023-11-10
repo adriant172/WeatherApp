@@ -132,8 +132,8 @@ async function displayForecastWeather(dataContainer, weatherData) {
     const conditionText = createNewElement("p", `${weatherData.date}-conditionText`, ["condition"], weatherData.condition.text);
 
     const conditionIconContainer = document.createElement("div");
-    const conditionIconGif = await apiCalls.getGif(weatherData.condition.text);
-    const conditionIcon = createNewElement("img", `${weatherData.date}-conditionIcon` , ["condition"], conditionIconGif);
+    const conditionIconName = await iconSelector(weatherData.condition.text);
+    const conditionIcon = createNewElement("img", `${weatherData.date}-conditionIcon` , ["condition"], `./weatherIcons/${conditionIconName}`);
     conditionIconContainer.appendChild(conditionIcon);
     conditionIconContainer.classList.add("forecastConditionIconContainer");
 
@@ -161,8 +161,8 @@ async function  displayCurrentWeather(container, weatherData) {
     const conditionText = createNewElement("p", "currentConditionText", ["condition"], weatherData.condition.text);
 
     const conditionIconContainer = document.createElement("div");
-    const conditionIconGif = await apiCalls.getGif(weatherData.condition.text);
-    const conditionIcon = createNewElement("img", "currentConditionIcon" , ["condition"], conditionIconGif);
+    const conditionIconName = await iconSelector(weatherData.condition.text);
+    const conditionIcon = createNewElement("img", "currentConditionIcon" , ["current-condition"], `./weatherIcons/${conditionIconName}`);
     conditionIconContainer.appendChild(conditionIcon);
     conditionIconContainer.classList.add("conditionIconContainer");
 
@@ -207,5 +207,21 @@ export function clearData(dataContainer) {
     }
 }
 
+async function iconSelector(conditionText) {
+    const words = conditionText.toLowerCase().split(' ')
+    const result = await fetch("./iconMapping.json");
+    const iconMapping = await result.json();
+    let icon;
 
-
+    words.forEach( word => {
+        for (let i = 0; i < iconMapping.length; i++) {
+            const currentElement = iconMapping[i]["condition"]
+            if (currentElement.includes(word)) {
+                console.log(" This is the icon name " + iconMapping[i]["icon"])
+                icon = iconMapping[i]["icon"]
+                return
+            }
+        }
+    })
+    return icon
+}

@@ -81,6 +81,10 @@ body {
 .condition {
     display: flex;
 }
+.current-condition {
+    width: 300px;
+    height: 300px;
+}
 #forecast {
     display: flex;
     justify-content: space-around;
