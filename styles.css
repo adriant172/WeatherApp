@@ -1,6 +1,8 @@
 body {
     display: flex;
     justify-content: center;
+    align-content: center;
+    flex-flow: column wrap;
     background-color: #E3DFFF;
 }
 
@@ -17,14 +19,14 @@ body {
     
 }
 #searchContainer {
-    grid-column: 3 / 6;
     display: flex;
     justify-content:center;
+    align-items: stretch;
     gap: 15px;
     height: 2em;
 }
 #locationSearch {
-    max-width: 500px;
+    min-width: 300px;
     border: none;
     border-radius: 5px;
 }
@@ -32,7 +34,8 @@ body {
     border: none;
 }
 #currentWeatherBtn {
-    max-width: 150px;
+    width: max-content;
+    
 }
 #displayData {
     grid-column: 3 / 6;
@@ -82,8 +85,8 @@ body {
     display: flex;
 }
 .current-condition {
-    width: 300px;
-    height: 300px;
+    width: 150px;
+    height: 150px;
 }
 #forecast {
     display: flex;

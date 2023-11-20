@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dropDownStyles.css">
 </head>
 <body>
+    <div id="searchContainer">
+        <input type="search" name="locationSearch" id="locationSearch">
+        <button id="currentWeatherBtn">Get Weather</button>
+    </div>
     <div class="container">
-        <div id="searchContainer">
-            <input type="search" name="locationSearch" id="locationSearch">
-            <button id="currentWeatherBtn">Get Weather</button>
-        </div>
         <div id="displayData" class="displayInfo"></div>
         <div id="forecast"></div>
     </div>
