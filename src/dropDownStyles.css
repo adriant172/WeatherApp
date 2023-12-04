@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap');
+
+* {
+  font-family: 'Oswald', sans-serif;
+}
+
+.dropDownButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  /* min-width: 20%; */
+  margin-bottom: .5rem;
+}
+.dropDownItems{
+  position: absolute;
+  min-width: 200px;
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 15px;
+  background-color:#f1faee;
+  border-radius: 2px;
+  visibility: hidden;
+}
+.visible {
+  visibility:visible;
+}
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: .5rem;
+  height: 2rem;
+  text-decoration: none;
+  color:black;
+}
+.item:hover {
+  background-color: #a8dadc;
+}
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48;
+  transition: all linear .3s;
+}
+.rotateIconDown {
+  transform: rotate(180deg);
+}
