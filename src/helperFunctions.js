@@ -1,4 +1,3 @@
-import * as apiCalls from './apiCalls.js'
 import iconData from "./iconMapping.json"
 
 const images = {};
@@ -11,9 +10,9 @@ importAll(require.context('./weatherIcons/', false, /\.svg$/));
 console.log(JSON.stringify(images));
 
 
-
-
+// For this assignment I am leaving the API KEY in the code. The API key is publicly available and there is no consequence for exposing it.
 const KEY = "b64784ee65e54392b7670004231608"
+
 const ENDPOINT = "https://api.weatherapi.com/v1/"
 
 

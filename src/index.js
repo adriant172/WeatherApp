@@ -22,9 +22,17 @@ if (!window.localStorage.getItem("tempScale")) {
 
 weatherApp.getWeatherButton("currentWeatherBtn", currentWeatherContainer, forecastContainer);
 
+
 const tempDropDownItems = document.querySelector(".dropDownItems");
 const tempDropDownButton = document.querySelector(".dropDownButton");
 const currentWeatherButton = document.querySelector("#currentWeatherBtn");
+
+document.addEventListener('keydown', (event) => {
+    if (event.code == "Enter") {
+        currentWeatherButton.click()
+    }
+    
+})
 
 
 for (const item of tempDropDownItems.children ) {
