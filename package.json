@@ -2,10 +2,12 @@
   "name": "weatherapp",
   "version": "1.0.0",
   "description": "This weather app will be used to showcase the usage of public APIs and asynchronous code.",
-  "private": true,
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack --mode=development",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -17,9 +19,10 @@
   "bugs": {
     "url": "https://github.com/adriant172/WeatherApp/issues"
   },
-  "homepage": "https://github.com/adriant172/WeatherApp#readme",
+  "homepage": "https://github.com/adriant172/WeatherApp",
   "devDependencies": {
     "css-loader": "^6.8.1",
+    "gh-pages": "^6.1.0",
     "json-loader": "^0.5.7",
     "style-loader": "^3.3.3",
     "webpack": "^5.89.0",
