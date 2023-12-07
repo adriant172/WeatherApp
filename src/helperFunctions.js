@@ -1,13 +1,5 @@
 import iconData from "./iconMapping.json"
-
-const images = {};
-
-function importAll(r) {
-  r.keys().forEach((key) => (images[key] = r(key)));
-}
-
-importAll(require.context('./weatherIcons/', false, /\.svg$/));
-console.log(JSON.stringify(images));
+import weatherIcons from "./weatherIcons.json"
 
 
 // For this assignment I am leaving the API KEY in the code. The API key is publicly available and there is no consequence for exposing it.
@@ -145,8 +137,8 @@ async function displayForecastWeather(dataContainer, weatherData) {
 
     const conditionIconContainer = document.createElement("div");
     const conditionIconName = await iconSelector(weatherData.condition.text);
-    // const conditionIcon = createNewElement("img", `${weatherData.date}-conditionIcon` , ["condition"], `./weatherIcons/${conditionIconName}`);
-    const conditionIcon = createNewElement("img", `${weatherData.date}-conditionIcon` , ["condition"], new URL(images[`./${conditionIconName}`], import.meta.url));
+    const svgText = weatherIcons[`${conditionIconName}`]
+    const conditionIcon = createNewElement("svg", "currentConditionIcon" , ["current-condition"], svgText);
     conditionIconContainer.appendChild(conditionIcon);
     conditionIconContainer.classList.add("forecastConditionIconContainer");
 
@@ -175,8 +167,9 @@ async function  displayCurrentWeather(container, weatherData) {
 
     const conditionIconContainer = document.createElement("div");
     const conditionIconName = await iconSelector(weatherData.condition.text);
-    // const conditionIcon = createNewElement("img", "currentConditionIcon" , ["current-condition"], `./weatherIcons/${conditionIconName}`);
-    const conditionIcon = createNewElement("img", "currentConditionIcon" , ["current-condition"], new URL(images[`./${conditionIconName}`], import.meta.url));
+    const svgText = weatherIcons[`${conditionIconName}`]
+    const conditionIcon = createNewElement("svg", "currentConditionIcon" , ["current-condition"], svgText);
+
     conditionIconContainer.appendChild(conditionIcon);
     conditionIconContainer.classList.add("conditionIconContainer");
 
